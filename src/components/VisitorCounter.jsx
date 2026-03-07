@@ -28,7 +28,7 @@ const VisitorCounter = () => {
   return (
     <div className="visitor-badge d-inline-flex align-items-center bg-dark text-light px-3 py-1 rounded-pill shadow-sm">
       <div className="pulse-dot me-2"></div>
-      <small className="fw-bold">
+      {/* <small className="fw-bold">
         Visitors: <span className="text-info">{count || '...'}</span>
       </small>
       
@@ -45,7 +45,7 @@ const VisitorCounter = () => {
           70% { transform: scale(1); box-shadow: 0 0 0 5px rgba(13, 202, 240, 0); }
           100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(13, 202, 240, 0); }
         }
-      `}</style>
+      `}</style> */}
     </div>
   );
 };

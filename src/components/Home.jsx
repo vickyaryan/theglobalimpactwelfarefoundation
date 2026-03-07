@@ -1,25 +1,30 @@
+import { Link } from "react-router-dom";
 import SEO from "./SEO";
+import Hero from "./Hero";
+import SocialWall from "./SocialWall";
 
 const Home = () => (
   <div>
     <SEO
   title="Home" 
-  description="The Global Impact Welfare Foundation is a non-profit NGO based in Uttam Nagar, Delhi, dedicated to education, healthcare, and social welfare." 
+  description="The GIW Foundation is a non-profit NGO based in Uttam Nagar, Delhi, dedicated to education, healthcare, and social welfare." 
 />
     {/* Hero Section */}
     <header style={{ background: 'linear-gradient(135deg, #1a365d 0%, #3498db 100%)' }} className="text-white py-5">
       <div className="container py-5 text-center">
         <h1 className="display-4 fw-bold mb-3">Empowering Lives for a Better Tomorrow</h1>
-        <p className="lead mb-4 opacity-75">Join The Global Impact Welfare Foundation in creating sustainable change.</p>
+        <p className="lead mb-4 opacity-75">Join The GIW Foundation in creating sustainable change.</p>
         <div className="d-flex justify-content-center gap-3">
-          <button className="btn btn-light btn-lg px-5 fw-bold text-ngo-blue shadow">Our Mission</button>
-          {/* <button className="btn btn-outline-light btn-lg px-5 fw-bold">Watch Video</button> */}
+          <Link to="/donate" className="btn btn-warning btn-lg fw-bold px-4 shadow">Donate Now</Link>
+          <Link to="/contact" className="btn btn-outline-light btn-lg px-4 shadow">Join as Volunteer</Link>
         </div>
       </div>
     </header>
 
+    <Hero />
     {/* Impact Cards */}
     <div className="container py-5">
+      <h2 className="text-center fw-bold mb-5">Our Core Initiatives</h2>
       <div className="row g-4 text-center">
         <div className="col-md-4">
           <div className="card h-100 border-0 shadow-sm p-4 border-top border-4 border-info">
@@ -41,6 +46,7 @@ const Home = () => (
         </div>
       </div>
     </div>
+    <SocialWall />
   </div>
 );
 

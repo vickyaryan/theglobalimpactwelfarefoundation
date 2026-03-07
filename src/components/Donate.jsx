@@ -9,7 +9,7 @@ const Donate = () => {
     <div className="container py-5">
       <SEO
   title="Donate Now" 
-  description="Support our mission. Your donations to The Global Impact Welfare Foundation help provide education and healthcare to those in need." 
+  description="Support our mission. Your donations to The GIW Foundation help provide education and healthcare to those in need." 
 />
     <div className="row justify-content-center">
       <div className="col-md-5">

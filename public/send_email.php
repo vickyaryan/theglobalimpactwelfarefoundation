@@ -17,13 +17,14 @@ if ($formData) {
     $email = filter_var($formData['email'], FILTER_SANITIZE_EMAIL);
     $message = strip_tags($formData['message']);
 
-    // Email details
-    $to = "info@theglobalimpactwelfarefoundation.com"; 
+    // Email details - Yahan dono email id comma lagakar likh diye hain
+    $to = "info@theglobalimpactwelfarefoundation.com, theglobalimpactwelfare@gmail.com"; 
     $subject = "New Inquiry from Website - " . $name;
     
     $email_content = "Name: $name\n";
     $email_content .= "Email: $email\n\n";
-    $email_content .= "subject: $email\n\n";
+    // Bug Fix: Yahan pehle galti se $email tha, ab $subject1 kar diya hai
+    $email_content .= "Subject: $subject1\n\n";
     $email_content .= "Message:\n$message\n";
 
     // Headers

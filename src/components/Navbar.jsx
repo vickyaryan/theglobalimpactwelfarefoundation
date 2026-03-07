@@ -18,10 +18,10 @@ const Navbar = () => {
           />
           <div className="d-flex flex-column">
             <span className="fw-bold lh-1 text-ngo-blue" style={{ fontSize: '1.2rem', color: '#1a365d' }}>
-              THE GLOBAL IMPACT
+              THE GIW
             </span>
             <span className="small text-muted fw-bold" style={{ fontSize: '0.75rem', letterSpacing: '1px' }}>
-              WELFARE FOUNDATION
+              FOUNDATION
             </span>
           </div>
         </Link>
@@ -39,6 +39,16 @@ const Navbar = () => {
                 Home
               </Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link fw-bold px-3" style={{ color: '#1a365d' }} to="/about">
+                About Us
+              </Link>
+            </li>                
+            <li className="nav-item">
+              <Link className="nav-link fw-bold px-3" style={{ color: '#1a365d' }} to="/gallery">
+                Gallery
+              </Link>
+            </li>        
             <li className="nav-item">
               <Link className="nav-link fw-bold px-3" style={{ color: '#1a365d' }} to="/contact">
                 Contact

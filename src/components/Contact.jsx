@@ -4,7 +4,7 @@ import SEO from './SEO';
 import { toast } from 'react-toastify';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [loading, setLoading] = useState(false);
 
   const sendEmail = async (e) => {
@@ -22,7 +22,7 @@ const Contact = () => {
       const result = await response.json();
       if (result.status === 'success') {
         toast.success("Thank You! > Your message has been successfully sent. Our team will review your inquiry and get back to you shortly at info@theglobalimpactwelfarefoundation.com. We appreciate your interest in our foundation!");
-        setFormData({ name: '', email: '', message: '' });
+        setFormData({ name: '', email: '', subject: '', message: '' });
       }
     } catch (error) {
       console.error("Error:", error);
@@ -36,7 +36,7 @@ const Contact = () => {
     <div className="container py-5 animate-fadeIn">
       <SEO
         title="Contact Us"
-        description="Get in touch with The Global Impact Welfare Foundation. Visit our office at Hastal Vihar, Uttam Nagar or email us at info@theglobalimpactwelfarefoundation.com."
+        description="Get in touch with The GIW Foundation. Visit our office at Hastal Vihar, Uttam Nagar or email us at info@theglobalimpactwelfarefoundation.com."
       />
       {/* Header Section */}
       <div className="text-center mb-5">
@@ -60,9 +60,15 @@ const Contact = () => {
                 <h5 className="mb-0 fw-bold" style={{ color: '#1a365d' }}>Our Office</h5>
               </div>
               <p className="text-muted mb-0">
+                <a 
+                href="https://maps.app.goo.gl/tPETNsgHBhKwBCqp6" 
+                target="_blank" 
+                rel="noreferrer"
+                className="text-decoration-none text-muted" 
+              >📍
                 1st Floor, D-110, Hastal Vihar<br />
                 Near Holly Chauk, Uttam Nagar West<br />
-                New Delhi - 110059
+                New Delhi - 110059 </a>
               </p>
             </div>
 
@@ -74,8 +80,16 @@ const Contact = () => {
                 </div>
                 <h5 className="mb-0 fw-bold" style={{ color: '#1a365d' }}>Direct Contact</h5>
               </div>
-              <p className="mb-1 fw-semibold text-dark">+91 9667283466</p>
-              <p className="text-muted mb-0 small text-break">info@theglobalimpactwelfarefoundation.com</p>
+              <p className="mb-1 fw-semibold text-dark">
+                <a 
+                href="tel:+919876543210" 
+                className="text-decoration-none text-muted"
+              > 📞 +91 9667283466 </a></p>
+              <p className="text-muted mb-0 small text-break">
+                <a 
+                href="mailto:info@theglobalimpactwelfarefoundation.com" 
+                className="text-decoration-none text-muted"
+              > 📧 info@theglobalimpactwelfarefoundation.com </a></p>
             </div>
 
             {/* Working Hours Card */}
@@ -114,8 +128,8 @@ const Contact = () => {
                     />
                   </div>
                   <div className="col-12">
-                    <label className="form-label small fw-bold">Subject</label>
-                    <input type="text" name="subject" className="form-control bg-light py-3 border-0" placeholder="Inquiry" required
+                    <label className="form-label small fw-bold">Phone Number</label>
+                    <input type="text" name="subject" className="form-control bg-light py-3 border-0" placeholder="Enetr Phone Number" required
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                     />
@@ -135,6 +149,24 @@ const Contact = () => {
             </div>
           </div>
         </div>
+
+        <div className="row mt-5">
+        <div className="col-12">
+          <div className="card border-0 shadow-sm rounded-4 overflow-hidden">
+            {/* Google Map Iframe focusing on Uttam Nagar West / Hastal Vihar area */}
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.023679863511!2d77.05189137409411!3d28.629052384241252!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d050070dd7b05%3A0x99b00aa11a816f9a!2sthe%20global%20impact%20welfare!5e0!3m2!1sen!2sin!4v1772880099551!5m2!1sen!2sin"
+              width="100%" 
+              height="450" 
+              style={{ border: 0 }} 
+              allowFullScreen="" 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Global Impact Welfare Foundation Location"
+            ></iframe>
+          </div>
+        </div>
+      </div>
       </div>
     </div>
   );
