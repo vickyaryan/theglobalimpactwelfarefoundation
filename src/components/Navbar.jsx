@@ -57,8 +57,7 @@ const Navbar = ({userAutentication}) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top py-3">
       <div className="container">
-        
-        {/* LEFT SIDE: LOGO & BRAND */}
+  
         <Link className="navbar-brand d-flex align-items-center" to="/">
           <img 
             src={logo} 
@@ -87,7 +86,6 @@ const Navbar = ({userAutentication}) => {
           {isOpen ? <X size={28} color="#1a365d" /> : <Menu size={28} color="#1a365d" />}
         </button>
 
-        {/* RIGHT SIDE: NAVIGATION LINKS */}
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto align-items-center">
             <li className="nav-item">
