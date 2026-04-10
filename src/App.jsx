@@ -21,7 +21,7 @@ import AdminDashboard from './components/admin/AdminDashboard'
 import { useEffect, useState } from 'react';
 import UserDashboard from './components/admin/UserDashboard';
 import ForgotPassword from './components/ForgotPassword';
-import Free from './components/free';
+import Free from './components/Free';
 
 function App() {
   const [user, setUser] = useState(null); // User state define karein
