@@ -13,7 +13,7 @@ const Contact = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('https://theglobalimpactwelfarefoundation.com/send_email.php', {
+      const response = await fetch('/api/send_email.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

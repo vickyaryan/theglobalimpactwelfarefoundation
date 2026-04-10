@@ -7,7 +7,7 @@ const VisitorDisplay = () => {
     // Database se data lane ke liye function
     const fetchStats = async () => {
       try {
-        const response = await fetch('https://theglobalimpactwelfarefoundation.com/counter.php');
+        const response = await fetch('/api/counter.php');
         const data = await response.json();
         setVisitorCount(data.count);
       } catch (error) {

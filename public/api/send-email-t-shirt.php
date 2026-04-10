@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $address = $data['address'];
 
     // Yahan apna email id dalein
-    $to = "your-email@gmail.com"; 
+    $to = "theglobalimpactwelfare@gmail.com"; 
     $subject = "New Swag Request: " . $item;
 
     $message = "
