@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -20,18 +21,12 @@ const Footer = () => {
           {/* Column 2: Quick Links */}
           <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
             <h5 className="text-uppercase mb-4 fw-bold" >Quick Links</h5>
-            <p>
-              <a href="/" className="text-white text-decoration-none" style={{ transition: '0.3s' }}>Home</a>
-            </p>
-            <p>
-              <a href="/about" className="text-white text-decoration-none">About Us</a>
-            </p>
-            <p>
-              <a href="/donate" className="text-white text-decoration-none">Donate Now</a>
-            </p>
-            <p>
-              <a href="/contact" className="text-white text-decoration-none">Contact Us</a>
-            </p>
+            <p> <Link to="/" className="text-white text-decoration-none" style={{ transition: '0.3s' }}>Home</Link> </p>
+            <p> <Link to="/about" className="text-white text-decoration-none">About Us</Link> </p>
+            <p> <Link to="/donate" className="text-white text-decoration-none">Donate Now</Link> </p>
+            <p> <Link to="/contact" className="text-white text-decoration-none">Contact Us</Link> </p>
+            <p> <Link to="/privacy-policy" className="text-white text-decoration-none">Privacy Policy</Link></p>
+            <p> <Link to="/terms-conditions" className="text-white text-decoration-none">Terms & Conditions</Link></p>
           </div>
 
           {/* Column 3: Contact Info */}

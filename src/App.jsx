@@ -1,4 +1,7 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { auth } from './components/backend/firebase';
+import { onAuthStateChanged } from 'firebase/auth';
+
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Donate from './components/Donate';
@@ -11,14 +14,31 @@ import WhatsApp from './components/WhatsApp';
 import Footer from './components/Footer';
 import Gallery from './components/Gallery';
 import ScrollToTop from './components/ScrollToTop';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import Terms from './components/Terms';
+import Login from './components/Login';
+import AdminDashboard from './components/admin/AdminDashboard'
+import { useEffect, useState } from 'react';
+import UserDashboard from './components/admin/UserDashboard';
 
 function App() {
+  const [user, setUser] = useState(null); // User state define karein
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser); // User ki details yahan save hogi
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
+
   return (
     <>
     <Router>
       <div className="min-h-screen bg-white">
         <ScrollToTop />
-        <Navbar />
+        <Navbar userAutentication={user?.email === "theglobalimpactwelfare@gmail.com"} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/donate" element={<Donate />} />
@@ -26,7 +46,21 @@ function App() {
           <Route path="/about" element={<AboutUs />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/display" element={<VisitorDisplay />} />
-
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-conditions" element={<Terms />} /> 
+          <Route path="/login" element={<Login />} /> 
+          <Route 
+  path="/admin-panel" 
+  element={
+    user ? (
+      user.email === "theglobalimpactwelfare@gmail.com" 
+        ? <AdminDashboard userAutentication={user.email === "theglobalimpactwelfare@gmail.com" } /> 
+        : <UserDashboard />
+    ) : (
+      <Navigate to="/donate" />
+    )
+  } 
+/>
           {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
         </Routes>
         <Footer />
