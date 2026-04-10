@@ -1,13 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { auth } from './backend/firebase'; // Apna firebase config import karein
-import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import logo from '../assets/logo-gif.gif'; 
 import { User, LogOut, LogIn, Heart, Menu, X } from 'lucide-react';
+import { toast } from 'react-toastify';
 
 const Navbar = ({userAutentication}) => {
   const [user, setUser] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const auth = getAuth();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user && (location?.pathname === '/login' || location?.pathname === '/forgot-password')) {
+        // toast.info("You are already logged in. Redirecting to donate page...");
+        navigate('/donate');
+      } else {
+        // setLoading(false);
+      }
+    });
+    return () => unsubscribe();
+  }, [navigate, auth]);
+
 
   // Monitor Auth State
   useEffect(() => {
@@ -30,12 +46,9 @@ const Navbar = ({userAutentication}) => {
   };
 
   const closeMenu = () => {
-    // Mobile menu ka element dhoondna
     const menu = document.getElementById('navbarNav');
     if (menu && menu.classList.contains('show')) {
-      // Bootstrap ki default class 'show' ko remove karke toggle state badalna
       setIsOpen(false);
-      // Bootstrap 5 CDN toggle logic
       const bsCollapse = window.bootstrap.Collapse.getInstance(menu) || new window.bootstrap.Collapse(menu);
       bsCollapse.hide();
     }

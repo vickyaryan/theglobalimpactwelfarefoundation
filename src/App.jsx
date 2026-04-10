@@ -20,6 +20,7 @@ import Login from './components/Login';
 import AdminDashboard from './components/admin/AdminDashboard'
 import { useEffect, useState } from 'react';
 import UserDashboard from './components/admin/UserDashboard';
+import ForgotPassword from './components/ForgotPassword';
 
 function App() {
   const [user, setUser] = useState(null); // User state define karein
@@ -48,6 +49,7 @@ function App() {
           <Route path="/display" element={<VisitorDisplay />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-conditions" element={<Terms />} /> 
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/login" element={<Login />} /> 
           <Route 
   path="/admin-panel" 

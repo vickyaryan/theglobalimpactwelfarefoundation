@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { auth, db } from './backend/firebase';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { User, Phone, Mail, Lock, Eye, EyeOff } from 'lucide-react';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -10,7 +11,6 @@ import {
   onAuthStateChanged
 } from 'firebase/auth';
 import { doc, setDoc, getDoc } from "firebase/firestore";
-import { Lock, Mail, User, Phone } from 'lucide-react';
 import { toast } from 'react-toastify'; // Toastify import
 import { BsGoogle } from 'react-icons/bs';
 
@@ -21,7 +21,8 @@ const Login = () => {
   const [fullName, setFullName] = useState('');
   const [mobile, setMobile] = useState(''); // Mobile state
   const [loading, setLoading] = useState(true);
-  
+  const [showPassword, setShowPassword] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,7 +41,7 @@ const Login = () => {
     if (err.code === 'auth/email-already-in-use') errorMessage = 'This email is already registered.';
     if (err.code === 'auth/weak-password') errorMessage = 'Password should be at least 6 characters.';
     if (err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password') errorMessage = 'Invalid email or password.';
-    
+
     toast.error(errorMessage); // Toast error
   };
 
@@ -61,7 +62,7 @@ const Login = () => {
           email: email,
           mobile: mobile,
           createdAt: new Date().toLocaleDateString(),
-          role: "user" 
+          role: "user"
         });
 
         toast.success(`Welcome to GIW Foundation, ${fullName}!`);
@@ -121,16 +122,16 @@ const Login = () => {
                   <div className="mb-3">
                     <label className="form-label small fw-bold">Full Name</label>
                     <div className="input-group shadow-sm rounded">
-                      <span className="input-group-text bg-white border-end-0"><User size={18} className="text-muted"/></span>
+                      <span className="input-group-text bg-white border-end-0"><User size={18} className="text-muted" /></span>
                       <input type="text" className="form-control border-start-0 ps-0" placeholder="Your Name" required value={fullName} onChange={(e) => setFullName(e.target.value)} />
                     </div>
                   </div>
-                  
+
                   {/* MOBILE NUMBER FIELD */}
                   <div className="mb-3">
                     <label className="form-label small fw-bold">Mobile Number</label>
                     <div className="input-group shadow-sm rounded">
-                      <span className="input-group-text bg-white border-end-0"><Phone size={18} className="text-muted"/></span>
+                      <span className="input-group-text bg-white border-end-0"><Phone size={18} className="text-muted" /></span>
                       <input type="tel" className="form-control border-start-0 ps-0" placeholder="10 Digit Number" required pattern="[0-9]{10}" value={mobile} onChange={(e) => setMobile(e.target.value)} />
                     </div>
                   </div>
@@ -140,7 +141,7 @@ const Login = () => {
               <div className="mb-3">
                 <label className="form-label small fw-bold">Email Address</label>
                 <div className="input-group shadow-sm rounded">
-                  <span className="input-group-text bg-white border-end-0"><Mail size={18} className="text-muted"/></span>
+                  <span className="input-group-text bg-white border-end-0"><Mail size={18} className="text-muted" /></span>
                   <input type="email" className="form-control border-start-0 ps-0" placeholder="name@example.com" required value={email} onChange={(e) => setEmail(e.target.value)} />
                 </div>
               </div>
@@ -148,10 +149,29 @@ const Login = () => {
               <div className="mb-4">
                 <label className="form-label small fw-bold">Password</label>
                 <div className="input-group shadow-sm rounded">
-                  <span className="input-group-text bg-white border-end-0"><Lock size={18} className="text-muted"/></span>
-                  <input type="password" className="form-control border-start-0 ps-0" placeholder="••••••••" required value={password} onChange={(e) => setPassword(e.target.value)} />
+                  <span className="input-group-text bg-white border-end-0"><Lock size={18} className="text-muted" /></span>
+                  <input type={showPassword ? "text" : "password"} className="form-control border-start-0 ps-0" placeholder="••••••••" required value={password} onChange={(e) => setPassword(e.target.value)} />
+                  <span 
+                    className="input-group-text bg-white border-start-0" 
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <EyeOff size={18} className="text-muted" />
+                    ) : (
+                      <Eye size={18} className="text-muted" />
+                    )}
+                  </span>
+
                 </div>
               </div>
+              {!isRegistering && (
+                <div className="text-end mb-4">
+                  <Link to="/forgot-password" size="sm" className="text-decoration-none small fw-bold" style={{ color: '#1a365d' }}>
+                    Forgot Password?
+                  </Link>
+                </div>
+              )}
 
               <button type="submit" className="btn btn-primary w-100 py-3 rounded-pill fw-bold shadow-sm mb-3" style={{ backgroundColor: '#1a365d' }} disabled={loading}>
                 {loading ? 'Processing...' : (isRegistering ? 'Register Now' : 'Login Now')}
@@ -166,8 +186,8 @@ const Login = () => {
             </button>
 
             <p className="text-center mb-0 small">
-              {isRegistering ? 
-                <>Already have an account? <button className="btn btn-link p-0 small fw-bold text-decoration-none" onClick={() => setIsRegistering(false)}>Login here</button></> : 
+              {isRegistering ?
+                <>Already have an account? <button className="btn btn-link p-0 small fw-bold text-decoration-none" onClick={() => setIsRegistering(false)}>Login here</button></> :
                 <>Don't have an account? <button className="btn btn-link p-0 small fw-bold text-decoration-none" onClick={() => setIsRegistering(true)}>Register here</button></>
               }
             </p>
